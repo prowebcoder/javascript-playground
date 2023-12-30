@@ -25,7 +25,40 @@ function renderProducts(productsToRender) {
   productsToRender.forEach((product) => {
     const productItem = document.createElement("div");
     productItem.classList.add("product-item");
-    productItem.textContent = product.name;
+
+    // Create an image element and set the source
+    const productImage = document.createElement("img");
+    productImage.src = product.imageSrc;
+    productImage.alt = product.name;
+    productItem.appendChild(productImage);
+
+    // Create a div for product details
+    const productDetails = document.createElement("div");
+    productDetails.classList.add("product-details");
+
+    // Display product details
+    const productName = document.createElement("p");
+    productName.textContent = "Name: " + product.name;
+
+    const productSize = document.createElement("p");
+    productSize.textContent = "Size: " + product.size;
+
+    const productColor = document.createElement("p");
+    productColor.textContent = "Color: " + product.color;
+
+    const productPrice = document.createElement("p");
+    productPrice.textContent = "Price: " + product.price;
+
+    // Append details to the productDetails div
+    productDetails.appendChild(productName);
+    productDetails.appendChild(productSize);
+    productDetails.appendChild(productColor);
+    productDetails.appendChild(productPrice);
+
+    // Append the productDetails div to the productItem
+    productItem.appendChild(productDetails);
+
+    // Append the productItem to the productGrid
     productGrid.appendChild(productItem);
   });
 }
