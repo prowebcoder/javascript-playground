@@ -30,6 +30,7 @@ function renderProducts(productsToRender) {
     const productImage = document.createElement("img");
     productImage.src = product.imageSrc;
     productImage.alt = product.name;
+    productImage.style.width = "100%";
     productItem.appendChild(productImage);
 
     // Create a div for product details
