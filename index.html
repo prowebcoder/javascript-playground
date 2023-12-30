@@ -4,17 +4,77 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Javascript Playground</title>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f8f9fa;
+        color: #343a40;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+      }
+
+      h1 {
+        color: #007bff;
+        margin-bottom: 10px;
+      }
+
+      h2 {
+        text-align: center;
+        margin-bottom: 30px;
+        font-size: 1.2em;
+        color: #495057;
+      }
+
+      ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      li {
+        margin: 10px;
+        background-color: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        transition: transform 0.3s ease-in-out;
+        width: 200px;
+      }
+
+      li:hover {
+        transform: scale(1.05);
+      }
+
+      a {
+        display: block;
+        padding: 20px;
+        text-align: center;
+        text-decoration: none;
+        color: #343a40;
+        transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+      }
+
+      a:hover {
+        background-color: #007bff;
+        color: #ffffff;
+      }
+    </style>
   </head>
   <body>
     <h1>Javascript Playground</h1>
-    <h2>
-      Below is listed few Javascript playground things which we can implement
-      using javscript
-    </h2>
+    <h2>Explore various JavaScript playground features below:</h2>
     <ul>
       <li><a href="/javascript-playground/filter/">Filter</a></li>
       <li><a href="/javascript-playground/prod-quickview/">Quickview</a></li>
-      <li><a href="/javascript-playground/addtocart/">Add To cart</a></li>
+      <li><a href="/javascript-playground/addtocart/">Add To Cart</a></li>
       <li><a href="/javascript-playground/wishlist/">Wishlist</a></li>
       <li><a href="/javascript-playground/lightbox/">Lightbox</a></li>
     </ul>
