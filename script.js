@@ -10,13 +10,12 @@ fetch("products.json")
   .then((response) => response.json())
   .then((data) => {
     products = data; // Assign loaded products to the global variable
-    // Initial rendering of products
-    renderProducts(products);
-
+    renderProducts(getFilteredProducts());
+    updateFiltersFromQueryParams();
     // Event listeners for filters
-    sizeFilter.addEventListener("change", filterProducts);
-    colorFilter.addEventListener("change", filterProducts);
-    priceFilter.addEventListener("change", filterProducts);
+    sizeFilter.addEventListener("change", updateURLParamsAndFilter);
+    colorFilter.addEventListener("change", updateURLParamsAndFilter);
+    priceFilter.addEventListener("change", updateURLParamsAndFilter);
   })
   .catch((error) => console.error("Error loading products:", error));
 
@@ -30,7 +29,6 @@ function renderProducts(productsToRender) {
     const productImage = document.createElement("img");
     productImage.src = product.imageSrc;
     productImage.alt = product.name;
-    productImage.style.width = "100%";
     productItem.appendChild(productImage);
 
     // Create a div for product details
@@ -64,13 +62,34 @@ function renderProducts(productsToRender) {
   });
 }
 
-function filterProducts() {
-  const filteredProducts = products.filter(
-    (product) =>
-      (sizeFilter.value === "all" || product.size === sizeFilter.value) &&
-      (colorFilter.value === "all" || product.color === colorFilter.value) &&
-      (priceFilter.value === "all" || product.price === priceFilter.value)
-  );
+function updateFiltersFromQueryParams() {
+  const urlSearchParams = new URLSearchParams(window.location.search);
+  sizeFilter.value = urlSearchParams.get("size") || "all";
+  colorFilter.value = urlSearchParams.get("color") || "all";
+  priceFilter.value = urlSearchParams.get("price") || "all";
+}
 
-  renderProducts(filteredProducts);
+function updateURLParamsAndFilter() {
+  const urlSearchParams = new URLSearchParams();
+  urlSearchParams.set("size", sizeFilter.value);
+  urlSearchParams.set("color", colorFilter.value);
+  urlSearchParams.set("price", priceFilter.value);
+
+  const newURL = window.location.pathname + "?" + urlSearchParams.toString();
+  history.pushState(null, "", newURL);
+
+  renderProducts(getFilteredProducts());
+}
+
+function getFilteredProducts() {
+  const sizeParam = sizeFilter.value;
+  const colorParam = colorFilter.value;
+  const priceParam = priceFilter.value;
+
+  return products.filter(
+    (product) =>
+      (sizeParam === "all" || product.size === sizeParam) &&
+      (colorParam === "all" || product.color === colorParam) &&
+      (priceParam === "all" || product.price === priceParam)
+  );
 }
