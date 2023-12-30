@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add to Cart Program</title>
+  </head>
+  <body>
+    <h1>Add to Cart Program</h1>
+
+    <p>Available Items:</p>
+    <ul id="item-list">
+      <li data-item="item1">Item 1 - $10</li>
+      <li data-item="item2">Item 2 - $20</li>
+      <li data-item="item3">Item 3 - $15</li>
+    </ul>
+
+    <button onclick="addItemWithLoop()">Add with For Loop</button>
+    <button onclick="addItemWithSwitch()">Add with Switch Case</button>
+    <button onclick="addItemWithCondition()">Add with If-Else</button>
+    <button onclick="addItemWithForIn()">Add with For...In Loop</button>
+    <button onclick="addItemWithForOf()">Add with For...Of Loop</button>
+
+    <p>Your Cart:</p>
+    <ul id="cart"></ul>
+
+    <script>
+      // Cart array to store added items
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+      // Function to add item to cart using for loop
+      function addItemWithLoop() {
+        const items = ["item1", "item2", "item3"];
+        for (let i = 0; i < items.length; i++) {
+          cart.push(items[i]);
+        }
+        updateCartDisplay();
+        updateLocalStorage();
+      }
+
+      // Function to add item to cart using switch case
+      function addItemWithSwitch() {
+        const item = prompt("Enter item number (1, 2, or 3):");
+        switch (item) {
+          case "1":
+            cart.push("item1");
+            break;
+          case "2":
+            cart.push("item2");
+            break;
+          case "3":
+            cart.push("item3");
+            break;
+          default:
+            alert("Invalid item number!");
+        }
+        updateCartDisplay();
+        updateLocalStorage();
+      }
+
+      // Function to add item to cart using if-else condition
+      function addItemWithCondition() {
+        const randomNum = Math.floor(Math.random() * 3) + 1;
+        if (randomNum === 1) {
+          cart.push("item1");
+        } else if (randomNum === 2) {
+          cart.push("item2");
+        } else {
+          cart.push("item3");
+        }
+        updateCartDisplay();
+        updateLocalStorage();
+      }
+
+      // Function to add item to cart using for...in loop
+      function addItemWithForIn() {
+        const items = { 1: "item1", 2: "item2", 3: "item3" };
+        for (const key in items) {
+          cart.push(items[key]);
+        }
+        updateCartDisplay();
+        updateLocalStorage();
+      }
+
+      // Function to add item to cart using for...of loop
+      function addItemWithForOf() {
+        const items = ["item1", "item2", "item3"];
+        for (const item of items) {
+          cart.push(item);
+        }
+        updateCartDisplay();
+        updateLocalStorage();
+      }
+
+      // Function to remove item from cart
+      function removeItemFromCart(index) {
+        cart.splice(index, 1);
+        updateCartDisplay();
+        updateLocalStorage();
+      }
+
+      // Function to update cart display
+      function updateCartDisplay() {
+        const cartList = document.getElementById("cart");
+        // Clear existing cart display
+        cartList.innerHTML = "";
+
+        // Populate cart items
+        cart.forEach((item, index) => {
+          const li = document.createElement("li");
+          li.textContent = `${item} `;
+
+          // Add a "Remove" button for each item in the cart
+          const removeButton = document.createElement("button");
+          removeButton.textContent = "Remove";
+          removeButton.onclick = () => removeItemFromCart(index);
+          li.appendChild(removeButton);
+
+          cartList.appendChild(li);
+        });
+      }
+
+      // Function to update local storage with current cart items
+      function updateLocalStorage() {
+        localStorage.setItem("cart", JSON.stringify(cart));
+      }
+
+      // Initial update of cart display
+      updateCartDisplay();
+    </script>
+  </body>
+</html>

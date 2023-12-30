@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product Wishlist</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+
+      h1,
+      h2 {
+        text-align: center;
+      }
+
+      #products {
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+        flex-direction: row;
+        flex-wrap: wrap;
+      }
+      #products img {
+        width: 250px;
+      }
+      .product {
+        border: 1px solid #ddd;
+        padding: 10px;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      button {
+        margin-top: 10px;
+        padding: 5px 10px;
+        cursor: pointer;
+      }
+
+      #wishlist {
+        list-style: none;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Product Wishlist</h1>
+
+    <div id="products">
+      <div class="product">
+        <img src="prod.png" alt="Product 1" />
+        <span>Product 1</span>
+        <button onclick="toggleWishlist('product1')">Add to Wishlist</button>
+      </div>
+      <div class="product">
+        <img src="prod.png" alt="Product 2" />
+        <span>Product 2</span>
+        <button onclick="toggleWishlist('product2')">Add to Wishlist</button>
+      </div>
+      <div class="product">
+        <img src="prod.png" alt="Product 3" />
+        <span>Product 3</span>
+        <button onclick="toggleWishlist('product3')">Add to Wishlist</button>
+      </div>
+      <div class="product">
+        <img src="prod.png" alt="Product 4" />
+        <span>Product 4</span>
+        <button onclick="toggleWishlist('product4')">Add to Wishlist</button>
+      </div>
+    </div>
+
+    <h2>Wishlist</h2>
+    <ul id="wishlist"></ul>
+
+    <script>
+      function toggleWishlist(productId) {
+        const wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+
+        const index = wishlist.indexOf(productId);
+        console.log(wishlist.indexOf(productId));
+
+        if (index === -1) {
+          wishlist.push(productId);
+        } else {
+          wishlist.splice(index, 1);
+        }
+
+        localStorage.setItem("wishlist", JSON.stringify(wishlist));
+        updateWishlistUI();
+      }
+
+      function updateWishlistUI() {
+        const wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+        const wishlistElement = document.getElementById("wishlist");
+
+        wishlistElement.innerHTML = "";
+
+        wishlist.forEach((productId) => {
+          const listItem = document.createElement("li");
+          listItem.textContent = `Product ${productId}`;
+          wishlistElement.appendChild(listItem);
+        });
+      }
+
+      updateWishlistUI();
+    </script>
+  </body>
+</html>
