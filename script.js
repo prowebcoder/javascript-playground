@@ -1,3 +1,5 @@
+let products; // Declare products globally
+
 const productGrid = document.getElementById("productGrid");
 const sizeFilter = document.getElementById("sizeFilter");
 const colorFilter = document.getElementById("colorFilter");
@@ -6,7 +8,8 @@ const priceFilter = document.getElementById("priceFilter");
 // Load products from JSON file
 fetch("products.json")
   .then((response) => response.json())
-  .then((products) => {
+  .then((data) => {
+    products = data; // Assign loaded products to the global variable
     // Initial rendering of products
     renderProducts(products);
 
