@@ -1,0 +1,7 @@
+[
+  { "name": "Product 1", "size": "small", "color": "red", "price": "low" },
+  { "name": "Product 2", "size": "medium", "color": "blue", "price": "medium" },
+  { "name": "Product 3", "size": "large", "color": "green", "price": "high" },
+  { "name": "Product 4", "size": "medium", "color": "red", "price": "medium" },
+  { "name": "Product 5", "size": "small", "color": "blue", "price": "low" }
+]

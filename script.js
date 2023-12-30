@@ -1,22 +1,21 @@
-const products = [
-  { name: "Product 1", size: "small", color: "red", price: "low" },
-  { name: "Product 2", size: "medium", color: "blue", price: "medium" },
-  { name: "Product 3", size: "large", color: "green", price: "high" },
-  // Add more products as needed
-];
-
 const productGrid = document.getElementById("productGrid");
 const sizeFilter = document.getElementById("sizeFilter");
 const colorFilter = document.getElementById("colorFilter");
 const priceFilter = document.getElementById("priceFilter");
 
-// Initial rendering of products
-renderProducts(products);
+// Load products from JSON file
+fetch("products.json")
+  .then((response) => response.json())
+  .then((products) => {
+    // Initial rendering of products
+    renderProducts(products);
 
-// Event listeners for filters
-sizeFilter.addEventListener("change", filterProducts);
-colorFilter.addEventListener("change", filterProducts);
-priceFilter.addEventListener("change", filterProducts);
+    // Event listeners for filters
+    sizeFilter.addEventListener("change", filterProducts);
+    colorFilter.addEventListener("change", filterProducts);
+    priceFilter.addEventListener("change", filterProducts);
+  })
+  .catch((error) => console.error("Error loading products:", error));
 
 function renderProducts(productsToRender) {
   productGrid.innerHTML = "";
