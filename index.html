@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Product Filter</title>
+  </head>
+  <body>
+    <div class="filter-container">
+      <label
+        >Size:
+        <select id="sizeFilter">
+          <option value="all">All</option>
+          <option value="small">Small</option>
+          <option value="medium">Medium</option>
+          <option value="large">Large</option>
+        </select>
+      </label>
+
+      <label
+        >Color:
+        <select id="colorFilter">
+          <option value="all">All</option>
+          <option value="red">Red</option>
+          <option value="blue">Blue</option>
+          <option value="green">Green</option>
+        </select>
+      </label>
+
+      <label
+        >Price:
+        <select id="priceFilter">
+          <option value="all">All</option>
+          <option value="low">Low</option>
+          <option value="medium">Medium</option>
+          <option value="high">High</option>
+        </select>
+      </label>
+    </div>
+
+    <div class="product-grid" id="productGrid">
+      <!-- Product items will be dynamically added here -->
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
