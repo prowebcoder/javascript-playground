@@ -1,11 +1,13 @@
-class AnimalButton extends HTMLButtonElement {
+class DogButton extends HTMLButtonElement {
   constructor() {
     super();
     this.isSpeaking = false;
+    this.textContent = "Dog";
+    this.addEventListener("click", () => this.displayInfo());
   }
 
   makeSound() {
-    return "Default sound";
+    return "Woof! Woof!";
   }
 
   speak() {
@@ -17,65 +19,91 @@ class AnimalButton extends HTMLButtonElement {
     this.isSpeaking = false;
     return "Stopped speaking";
   }
-}
 
-// Define custom elements
-customElements.define("animal-button", AnimalButton, { extends: "button" });
+  displayInfo() {
+    const outputDiv = document.getElementById("output");
+    outputDiv.innerHTML = `<p>${this.speak()}</p>`;
 
-class DogButton extends AnimalButton {
-  constructor() {
-    super();
-  }
-
-  makeSound() {
-    return "Woof! Woof!";
+    setTimeout(() => {
+      outputDiv.innerHTML += `<p>${this.stopSpeaking()}</p>`;
+    }, 2000);
   }
 }
 
-class CatButton extends AnimalButton {
+customElements.define("dog-button", DogButton, { extends: "button" });
+
+class CatButton extends HTMLButtonElement {
   constructor() {
     super();
+    this.isSpeaking = false;
+    this.textContent = "Cat";
+    this.addEventListener("click", () => this.displayInfo());
   }
 
   makeSound() {
     return "Meow! Meow!";
   }
+
+  speak() {
+    this.isSpeaking = true;
+    return `Says ${this.makeSound()}`;
+  }
+
+  stopSpeaking() {
+    this.isSpeaking = false;
+    return "Stopped speaking";
+  }
+
+  displayInfo() {
+    const outputDiv = document.getElementById("output");
+    outputDiv.innerHTML = `<p>${this.speak()}</p>`;
+
+    setTimeout(() => {
+      outputDiv.innerHTML += `<p>${this.stopSpeaking()}</p>`;
+    }, 2000);
+  }
 }
 
-class BirdButton extends AnimalButton {
+customElements.define("cat-button", CatButton, { extends: "button" });
+
+class BirdButton extends HTMLButtonElement {
   constructor() {
     super();
+    this.isSpeaking = false;
+    this.textContent = "Bird";
+    this.addEventListener("click", () => this.displayInfo());
   }
 
   makeSound() {
     return "Tweet! Tweet!";
   }
 
-  fly() {
-    return "is flying";
+  speak() {
+    this.isSpeaking = true;
+    return `Says ${this.makeSound()}`;
+  }
+
+  stopSpeaking() {
+    this.isSpeaking = false;
+    return "Stopped speaking";
+  }
+
+  displayInfo() {
+    const outputDiv = document.getElementById("output");
+    outputDiv.innerHTML = `<p>${this.speak()}</p>`;
+
+    setTimeout(() => {
+      outputDiv.innerHTML += `<p>${this.stopSpeaking()}</p>`;
+    }, 2000);
   }
 }
 
+customElements.define("bird-button", BirdButton, { extends: "button" });
+
 // Create instances of the custom buttons
-const dogButton = new DogButton();
-const catButton = new CatButton();
-const birdButton = new BirdButton();
-
-// Display information on button click
-function displayAnimalInfo(animalButton) {
-  const outputDiv = document.getElementById("output");
-  outputDiv.innerHTML = "";
-
-  outputDiv.innerHTML += `<p>${animalButton.speak()}</p>`;
-
-  setTimeout(() => {
-    outputDiv.innerHTML += `<p>${animalButton.stopSpeaking()}</p>`;
-  }, 2000);
-}
-// Add event listeners to the buttons
-dogButton.addEventListener("click", () => displayAnimalInfo(dogButton));
-catButton.addEventListener("click", () => displayAnimalInfo(catButton));
-birdButton.addEventListener("click", () => displayAnimalInfo(birdButton));
+const dogButton = document.createElement("button", { is: "dog-button" });
+const catButton = document.createElement("button", { is: "cat-button" });
+const birdButton = document.createElement("button", { is: "bird-button" });
 
 // Append buttons to the container
 const container = document.querySelector(".animal-buttons-container");
