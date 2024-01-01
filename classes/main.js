@@ -1,96 +1,85 @@
-// Parent class
-class Animal {
-  constructor(name, sound) {
-    this.name = name;
-    this.sound = sound;
+class AnimalButton extends HTMLButtonElement {
+  constructor() {
+    super();
     this.isSpeaking = false;
   }
 
   makeSound() {
-    return this.sound;
+    return "Default sound";
   }
 
   speak() {
     this.isSpeaking = true;
-    return `${this.name} says ${this.makeSound()}`;
+    return `Says ${this.makeSound()}`;
   }
 
   stopSpeaking() {
     this.isSpeaking = false;
-    return `${this.name} stopped speaking`;
-  }
-
-  displayInfo() {
-    return `<p>${this.name} is a ${this.constructor.name.toLowerCase()}.</p>`;
+    return "Stopped speaking";
   }
 }
 
-// Child class
-class Dog extends Animal {
-  constructor(name) {
-    super(name, "Woof");
+// Define custom elements
+customElements.define("animal-button", AnimalButton, { extends: "button" });
+
+class DogButton extends AnimalButton {
+  constructor() {
+    super();
   }
 
   makeSound() {
-    return `${super.makeSound()} Woof!`;
+    return "Woof! Woof!";
   }
 }
 
-// Child class
-class Cat extends Animal {
-  constructor(name) {
-    super(name, "Meow");
+class CatButton extends AnimalButton {
+  constructor() {
+    super();
   }
 
   makeSound() {
-    return `${super.makeSound()} Meow!`;
+    return "Meow! Meow!";
   }
 }
 
-// Additional child class
-class Bird extends Animal {
-  constructor(name) {
-    super(name, "Tweet");
+class BirdButton extends AnimalButton {
+  constructor() {
+    super();
   }
 
   makeSound() {
-    return `${super.makeSound()} Tweet!`;
+    return "Tweet! Tweet!";
   }
 
   fly() {
-    return `${this.name} is flying`;
-  }
-
-  displayInfo() {
-    return super.displayInfo() + `<p>${this.name} is a bird.</p>`;
+    return "is flying";
   }
 }
 
-// Create instances of the classes
-const dog = new Dog("Buddy");
-const cat = new Cat("Whiskers");
-const bird = new Bird("Polly");
+// Create instances of the custom buttons
+const dogButton = new DogButton();
+const catButton = new CatButton();
+const birdButton = new BirdButton();
 
-// Display information on the webpage
-function displayAnimalInfo() {
-  document.getElementById("output").innerHTML =
-    dog.displayInfo() + cat.displayInfo() + bird.displayInfo();
-}
-// Make animals speak when the button is clicked
-function makeAnimalsSpeak() {
+// Display information on button click
+function displayAnimalInfo(animalButton) {
   const outputDiv = document.getElementById("output");
   outputDiv.innerHTML = "";
 
-  outputDiv.innerHTML += `<p>${dog.speak()}</p>`;
-  outputDiv.innerHTML += `<p>${cat.speak()}</p>`;
-  outputDiv.innerHTML += `<p>${bird.speak()}</p>`;
+  outputDiv.innerHTML += `<p>${animalButton.speak()}</p>`;
 
   setTimeout(() => {
-    outputDiv.innerHTML += `<p>${dog.stopSpeaking()}</p>`;
-    outputDiv.innerHTML += `<p>${cat.stopSpeaking()}</p>`;
-    outputDiv.innerHTML += `<p>${bird.stopSpeaking()}</p>`;
-  }, 3000);
+    outputDiv.innerHTML += `<p>${animalButton.stopSpeaking()}</p>`;
+  }, 2000);
 }
 
-// Display initial information
-displayAnimalInfo();
+// Add event listeners to the buttons
+dogButton.addEventListener("click", () => displayAnimalInfo(dogButton));
+catButton.addEventListener("click", () => displayAnimalInfo(catButton));
+birdButton.addEventListener("click", () => displayAnimalInfo(birdButton));
+
+// Append buttons to the container
+const container = document.querySelector(".animal-buttons-container");
+container.appendChild(dogButton);
+container.appendChild(catButton);
+container.appendChild(birdButton);
