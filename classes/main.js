@@ -72,7 +72,6 @@ function displayAnimalInfo(animalButton) {
     outputDiv.innerHTML += `<p>${animalButton.stopSpeaking()}</p>`;
   }, 2000);
 }
-
 // Add event listeners to the buttons
 dogButton.addEventListener("click", () => displayAnimalInfo(dogButton));
 catButton.addEventListener("click", () => displayAnimalInfo(catButton));
