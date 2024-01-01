@@ -76,7 +76,6 @@ function displayAnimalInfo() {
   document.getElementById("output").innerHTML =
     dog.displayInfo() + cat.displayInfo() + bird.displayInfo();
 }
-
 // Make animals speak when the button is clicked
 function makeAnimalsSpeak() {
   const outputDiv = document.getElementById("output");
